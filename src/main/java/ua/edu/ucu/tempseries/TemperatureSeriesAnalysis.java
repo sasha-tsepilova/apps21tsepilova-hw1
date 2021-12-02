@@ -9,6 +9,7 @@ public class TemperatureSeriesAnalysis {
     private int capacity = 0;
     private static final int zero = -273;
     private static final double minTemp = -100000000;
+    private static final double maxTemp = 100000000;
 
     public TemperatureSeriesAnalysis() {
         temperatureSeries = new double[]{};
@@ -61,7 +62,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double max() {
-        return findTempClosestToValue(Double.POSITIVE_INFINITY);
+        return findTempClosestToValue(maxTemp);
     }
 
     public double findTempClosestToZero() {
