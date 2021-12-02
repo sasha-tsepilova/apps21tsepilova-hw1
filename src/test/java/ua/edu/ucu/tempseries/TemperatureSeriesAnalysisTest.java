@@ -118,4 +118,46 @@ public class TemperatureSeriesAnalysisTest {
         double actualResult = seriesAnalysis.findTempClosestToValue(0);
     }
 
+    @Test
+    public void findTempsLessThen() {
+        // setup input data and expected result
+        double[] temperatureSeries = { 0.2, -0.2};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double[] expResult = {-0.2};
+
+        // call tested method
+        double[] actualResult = seriesAnalysis.findTempsLessThen(0);
+
+        // compare expected result with actual result
+        assertArrayEquals(expResult, actualResult, 0.00001);
+    }
+
+    @Test
+    public void findTempsGreaterThen() {
+        // setup input data and expected result
+        double[] temperatureSeries = { 0.2, -0.2};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double[] expResult = {0.2};
+
+        // call tested method
+        double[] actualResult = seriesAnalysis.findTempsGreaterThen(0);
+
+        // compare expected result with actual result
+        assertArrayEquals(expResult, actualResult, 0.00001);
+    }
+
+    @Test
+    public void addTemps() {
+        // setup input data and expected result
+        double[] temperatureSeries = { 0.2, -0.2};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = 1.0;
+
+        // call tested method
+        double actualResult = seriesAnalysis.addTemps(0.2, 0.3, 0.5);
+
+        // compare expected result with actual result
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+
 }

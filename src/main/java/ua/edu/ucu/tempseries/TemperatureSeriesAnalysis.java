@@ -8,6 +8,7 @@ public class TemperatureSeriesAnalysis {
     private int size = 0;
     private int capacity = 0;
     private final int zero = -273;
+    private double minTemp = -100000000;
 
     public TemperatureSeriesAnalysis() {
         temperatureSeries = new double[]{};
@@ -56,7 +57,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double min() {
-        return findTempClosestToValue(-100000000);
+        return findTempClosestToValue(minTemp);
     }
 
     public double max() {
@@ -79,7 +80,7 @@ public class TemperatureSeriesAnalysis {
             if (minDif > Math.abs(temp-tempValue)) {
                 minDif = Math.abs(temp-tempValue);
                 searchedTemp = temp;
-            }else  if (minDif == Math.abs(temp-tempValue) && temp > 0) {
+            } else if (minDif == Math.abs(temp-tempValue) && temp > 0) {
                 searchedTemp = temp;
             }
         }
@@ -108,38 +109,45 @@ public class TemperatureSeriesAnalysis {
     public double[] findTempsGreaterThen(double tempValue) {
         int count = 0;
         for (int i = 0; i < size; i++) {
-            if (temperatureSeries[i] < tempValue) { count++; }
+            if (temperatureSeries[i] > tempValue) { count++; }
         }
-        double[] lessTemps = new double[count];
+        double[] greaterTemps = new double[count];
 
         count = 0;
         for (int i = 0; i < size; i++) {
             double temp = temperatureSeries[i];
-            if (temp < tempValue) {
-                lessTemps[count] = temp;
+            if (temp > tempValue) {
+                greaterTemps[count] = temp;
                 count++;
             }
         }
-        return lessTemps;
+        return greaterTemps;
     }
 
     public TempSummaryStatistics summaryStatistics() {
         return new TempSummaryStatistics(average(), deviation(), min(), max());
     }
 
-    public int addTemps(double... temps) {
+    public double addTemps(double... temps) {
         checkSeriesIsValid(temps);
+        double sum = 0;
         if (temps.length + size > capacity) {
             while (temps.length + size > capacity) {
                 capacity *= 2;
             }
-            temperatureSeries = Arrays.copyOf(temperatureSeries, size);
         }
 
+        double[] newTemps = new double[capacity];
+        for (int i = 0; i < size; i++) {
+            newTemps[i] = temperatureSeries[i];
+            sum += temperatureSeries[i];
+        }
+        temperatureSeries = newTemps;
         for (double temp: temps) {
             temperatureSeries[size] = temp;
             size++;
+            sum += temp;
         }
-        return 0;
+        return sum;
     }
 }
