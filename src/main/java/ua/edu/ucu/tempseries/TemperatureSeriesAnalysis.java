@@ -7,7 +7,7 @@ public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
     private int size = 0;
     private int capacity = 0;
-    private final int ZERO = -273;
+    private final int zero = -273;
 
     public TemperatureSeriesAnalysis() {
         temperatureSeries = new double[]{};
@@ -22,7 +22,7 @@ public class TemperatureSeriesAnalysis {
     }
     public void checkSeriesIsValid(double[] temperatureSeq) {
         for (double temp: temperatureSeq) {
-            if (temp < ZERO) {
+            if (temp < zero) {
                 throw new InputMismatchException();
             }
         }
@@ -30,7 +30,9 @@ public class TemperatureSeriesAnalysis {
 
 
     public double average() {
-        if (temperatureSeries.length == 0) { throw new IllegalArgumentException(); }
+        if (temperatureSeries.length == 0) {
+            throw new IllegalArgumentException();
+        }
 
         double sum = 0;
         for (double temp : temperatureSeries) {
@@ -72,7 +74,7 @@ public class TemperatureSeriesAnalysis {
         }
         double minDif = Double.POSITIVE_INFINITY;
         double searchedTemp = temperatureSeries[0];
-        for (int i = 0; i < size ; i++) {
+        for (int i = 0; i < size; i++) {
             double temp = temperatureSeries[i];
             if (minDif > Math.abs(temp-tempValue)) {
                 minDif = Math.abs(temp-tempValue);
@@ -87,7 +89,7 @@ public class TemperatureSeriesAnalysis {
 
     public double[] findTempsLessThen(double tempValue) {
         int count = 0;
-        for (int i = 0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             if (temperatureSeries[i] < tempValue) { count++; }
         }
         double[] lessTemps = new double[count];
