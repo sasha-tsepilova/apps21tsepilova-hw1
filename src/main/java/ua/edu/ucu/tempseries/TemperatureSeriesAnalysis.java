@@ -7,6 +7,7 @@ public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
     private int size = 0;
     private int capacity = 0;
+    private final int ZERO = -273;
 
     public TemperatureSeriesAnalysis() {
         temperatureSeries = new double[]{};
@@ -21,8 +22,7 @@ public class TemperatureSeriesAnalysis {
     }
     public void checkSeriesIsValid(double[] temperatureSeq) {
         for (double temp: temperatureSeq) {
-            int zero = -273;
-            if (temp < zero) {
+            if (temp < ZERO) {
                 throw new InputMismatchException();
             }
         }
@@ -30,7 +30,7 @@ public class TemperatureSeriesAnalysis {
 
 
     public double average() {
-        if (temperatureSeries.length == 0) {throw new IllegalArgumentException();}
+        if (temperatureSeries.length == 0) { throw new IllegalArgumentException(); }
 
         double sum = 0;
         for (double temp : temperatureSeries) {
@@ -40,7 +40,9 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double deviation() {
-        if (temperatureSeries.length == 0) {throw new IllegalArgumentException();}
+        if (temperatureSeries.length == 0) {
+            throw new IllegalArgumentException();
+        }
 
         double mean = average();
         double meanSq = 0;
@@ -65,7 +67,9 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToValue(double tempValue) {
-        if (temperatureSeries.length == 0) {throw new IllegalArgumentException();}
+        if (temperatureSeries.length == 0) {
+            throw new IllegalArgumentException();
+        }
         double minDif = Double.POSITIVE_INFINITY;
         double searchedTemp = temperatureSeries[0];
         for (int i = 0; i < size ; i++) {
@@ -84,7 +88,7 @@ public class TemperatureSeriesAnalysis {
     public double[] findTempsLessThen(double tempValue) {
         int count = 0;
         for (int i = 0; i<size; i++) {
-            if (temperatureSeries[i] < tempValue) {count++;}
+            if (temperatureSeries[i] < tempValue) { count++; }
         }
         double[] lessTemps = new double[count];
 
@@ -102,7 +106,7 @@ public class TemperatureSeriesAnalysis {
     public double[] findTempsGreaterThen(double tempValue) {
         int count = 0;
         for (int i = 0; i < size; i++) {
-            if (temperatureSeries[i] < tempValue) {count++;}
+            if (temperatureSeries[i] < tempValue) { count++; }
         }
         double[] lessTemps = new double[count];
 
