@@ -3,27 +3,28 @@ package ua.edu.ucu.tempseries;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
-import static java.lang.Math.abs;
-import static java.lang.Math.sqrt;
+import java.lang.Math.*;
+
 
 public class TemperatureSeriesAnalysis {
-    double[] temperatureSeries;
-    int size = 0;
-    int capacity = 0;
+    private double[] temperatureSeries;
+    private int size = 0;
+    private int capacity = 0;
     public TemperatureSeriesAnalysis() {
         temperatureSeries = new double[]{};
     }
 
-    public TemperatureSeriesAnalysis(double[] temperatureSeries) {
+    public TemperatureSeriesAnalysis(double[] temperatureSeries){
         checkSeriesIsValid(temperatureSeries);
-        this.temperatureSeries = Arrays.copyOf(temperatureSeries,temperatureSeries.length);
+        this.temperatureSeries = Arrays.copyOf(temperatureSeries,
+                                            temperatureSeries.length);
         size = temperatureSeries.length;
         capacity = temperatureSeries.length;
     }
 
     public void checkSeriesIsValid(double[] temperatureSeries) {
         for(double temp: temperatureSeries){
-            if (temp<-273){
+            if(temp<-273){
                 throw new InputMismatchException();
             }
         }
@@ -48,7 +49,7 @@ public class TemperatureSeriesAnalysis {
             mean_sq += temperatureSeries[i];
         }
         mean_sq /= temperatureSeries.length;
-        return sqrt(mean_sq - mean*mean);
+        return Math.sqrt(mean_sq - mean*mean);
     }
 
     public double min() {
@@ -70,10 +71,10 @@ public class TemperatureSeriesAnalysis {
         double searchedTemp = temperatureSeries[0];
         for(int i = 0; i < size ; i++){
             double temp = temperatureSeries[i];
-            if(minDif > abs(temp-tempValue)){
-                minDif = abs(temp-tempValue);
+            if(minDif > Math.abs(temp-tempValue)){
+                minDif = Math.abs(temp-tempValue);
                 searchedTemp = temp;
-            }  if(minDif == abs(temp-tempValue) && temp > 0){
+            }  if(minDif == Math.abs(temp-tempValue) && temp > 0){
                 searchedTemp = temp;
             }
         }
