@@ -56,7 +56,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double min() {
-        return findTempClosestToValue(Double.NEGATIVE_INFINITY);
+        return findTempClosestToValue(-100000000);
     }
 
     public double max() {
@@ -79,7 +79,7 @@ public class TemperatureSeriesAnalysis {
             if (minDif > Math.abs(temp-tempValue)) {
                 minDif = Math.abs(temp-tempValue);
                 searchedTemp = temp;
-            }  if (minDif == Math.abs(temp-tempValue) && temp > 0) {
+            }else  if (minDif == Math.abs(temp-tempValue) && temp > 0) {
                 searchedTemp = temp;
             }
         }
