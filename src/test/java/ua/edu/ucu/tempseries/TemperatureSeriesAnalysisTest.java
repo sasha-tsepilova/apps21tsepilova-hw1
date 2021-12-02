@@ -110,8 +110,7 @@ public class TemperatureSeriesAnalysisTest {
     @Test(expected = IllegalArgumentException.class)
     public void testFindClosestToValueExeption() {
         // setup input data and expected result
-        double[] temperatureSeries = {};
-        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
         double expResult = 0.2;
 
         // exception here
@@ -158,6 +157,26 @@ public class TemperatureSeriesAnalysisTest {
 
         // compare expected result with actual result
         assertEquals(expResult, actualResult, 0.00001);
+
+        expResult = 0.0;
+
+        // call tested method
+        actualResult = seriesAnalysis.addTemps(-1.0);
+
+        assertEquals(expResult, actualResult, 0.00001);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeviationException() {
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
+
+        double actualResult = seriesAnalysis.deviation();
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testTempSummaryStatistc(){
+        TemperatureSeriesAnalysis serAn = new TemperatureSeriesAnalysis();
+        TempSummaryStatistics sum = serAn.summaryStatistics();
+    }
 }

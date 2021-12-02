@@ -8,7 +8,7 @@ public class TemperatureSeriesAnalysis {
     private int size = 0;
     private int capacity = 0;
     private final int zero = -273;
-    private double minTemp = -100000000;
+    private final double minTemp = -100000000;
 
     public TemperatureSeriesAnalysis() {
         temperatureSeries = new double[]{};
