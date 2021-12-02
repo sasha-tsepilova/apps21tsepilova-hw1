@@ -4,12 +4,13 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
+    private static final int ZERO = -273;
+    private static final double MIN_TEMP = -100000000;
+    private static final double MAX_TEMP = 100000000;
+    private static final double EPSILON = 0.0001;
     private double[] temperatureSeries;
     private int size = 0;
     private int capacity = 0;
-    private static final int zero = -273;
-    private static final double minTemp = -100000000;
-    private static final double maxTemp = 100000000;
 
     public TemperatureSeriesAnalysis() {
         temperatureSeries = new double[]{};
@@ -24,7 +25,7 @@ public class TemperatureSeriesAnalysis {
     }
     public void checkSeriesIsValid(double[] temperatureSeq) {
         for (double temp: temperatureSeq) {
-            if (temp < zero) {
+            if (temp < ZERO) {
                 throw new InputMismatchException();
             }
         }
@@ -58,11 +59,11 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double min() {
-        return findTempClosestToValue(minTemp);
+        return findTempClosestToValue(MIN_TEMP);
     }
 
     public double max() {
-        return findTempClosestToValue(maxTemp);
+        return findTempClosestToValue(MAX_TEMP);
     }
 
     public double findTempClosestToZero() {
@@ -81,7 +82,8 @@ public class TemperatureSeriesAnalysis {
             if (minDif > Math.abs(temp-tempValue)) {
                 minDif = Math.abs(temp-tempValue);
                 searchedTemp = temp;
-            } else if (Math.abs(minDif - Math.abs(temp-tempValue)) < 0.0001 && temp > 0) {
+            } else if (Math.abs(minDif - Math.abs(temp-tempValue)) < EPSILON &&
+                                temp > 0) {
                 searchedTemp = temp;
             }
         }
