@@ -3,18 +3,25 @@ package ua.edu.ucu.tempseries;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
-import java.lang.Math.*;
-
-
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
     private int size = 0;
     private int capacity = 0;
+
     public TemperatureSeriesAnalysis() {
         temperatureSeries = new double[]{};
     }
 
-    public TemperatureSeriesAnalysis(double[] temperatureSeries){
+    public void checkSeriesIsValid(double[] temperatureSeries) {
+        for(double temp: temperatureSeries) {
+            int ZERO = -273;
+            if(temp < ZERO) {
+                throw new InputMismatchException();
+            }
+        }
+    }
+
+    public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         checkSeriesIsValid(temperatureSeries);
         this.temperatureSeries = Arrays.copyOf(temperatureSeries,
                                             temperatureSeries.length);
@@ -22,19 +29,11 @@ public class TemperatureSeriesAnalysis {
         capacity = temperatureSeries.length;
     }
 
-    public void checkSeriesIsValid(double[] temperatureSeries) {
-        for(double temp: temperatureSeries){
-            if(temp<-273){
-                throw new InputMismatchException();
-            }
-        }
-    }
-
     public double average() {
         if(temperatureSeries.length == 0) throw new IllegalArgumentException();
 
         double sum = 0;
-        for(double temp : temperatureSeries){
+        for(double temp : temperatureSeries) {
             sum += temp;
         }
         return sum/temperatureSeries.length;
@@ -45,7 +44,7 @@ public class TemperatureSeriesAnalysis {
 
         double mean = average();
         double mean_sq = 0;
-        for(int i = 0; i<size; i++){
+        for(int i = 0; i<size; i++) {
             mean_sq += temperatureSeries[i];
         }
         mean_sq /= temperatureSeries.length;
@@ -69,12 +68,12 @@ public class TemperatureSeriesAnalysis {
         if (temperatureSeries.length == 0) throw new IllegalArgumentException();
         double minDif = Double.POSITIVE_INFINITY;
         double searchedTemp = temperatureSeries[0];
-        for(int i = 0; i < size ; i++){
+        for(int i = 0; i < size ; i++) {
             double temp = temperatureSeries[i];
-            if(minDif > Math.abs(temp-tempValue)){
+            if(minDif > Math.abs(temp-tempValue)) {
                 minDif = Math.abs(temp-tempValue);
                 searchedTemp = temp;
-            }  if(minDif == Math.abs(temp-tempValue) && temp > 0){
+            }  if(minDif == Math.abs(temp-tempValue) && temp > 0) {
                 searchedTemp = temp;
             }
         }
@@ -90,7 +89,7 @@ public class TemperatureSeriesAnalysis {
         double[] lessTemps = new double[count];
 
         count = 0;
-        for(int i = 0; i<size; i++){
+        for(int i = 0; i<size; i++) {
             double temp = temperatureSeries[i];
             if(temp < tempValue){
                 lessTemps[count] = temp;
@@ -102,13 +101,13 @@ public class TemperatureSeriesAnalysis {
 
     public double[] findTempsGreaterThen(double tempValue) {
         int count = 0;
-        for(int i = 0; i<size; i++){
+        for(int i = 0; i<size; i++) {
             if(temperatureSeries[i] < tempValue) count++;
         }
         double[] lessTemps = new double[count];
 
         count = 0;
-        for(int i = 0; i<size; i++){
+        for(int i = 0; i<size; i++) {
             double temp = temperatureSeries[i];
             if(temp < tempValue){
                 lessTemps[count] = temp;
@@ -131,7 +130,7 @@ public class TemperatureSeriesAnalysis {
             temperatureSeries = Arrays.copyOf(temperatureSeries,size);
         }
 
-        for(double temp: temps){
+        for(double temp: temps) {
             temperatureSeries[size] = temp;
             size++;
         }
