@@ -49,7 +49,7 @@ public class TemperatureSeriesAnalysis {
         double mean = average();
         double meanSq = 0;
         for (int i = 0; i < size; i++) {
-            meanSq += temperatureSeries[i];
+            meanSq += temperatureSeries[i] * temperatureSeries[i];
         }
         meanSq /= temperatureSeries.length;
         return Math.sqrt(meanSq - mean*mean);

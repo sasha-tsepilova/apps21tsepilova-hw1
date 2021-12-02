@@ -32,7 +32,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test(expected = InputMismatchException.class)
     public void testZeroTemp() {
-        double[] temperatureSeries = {-273};
+        double[] temperatureSeries = {-274};
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
     }
 
@@ -54,7 +54,7 @@ public class TemperatureSeriesAnalysisTest {
 
         double actualResult = seriesAnalysis.deviation();
 
-        assertEquals(expResult, actualResult, 0.00001);
+        assertEquals(expResult, actualResult*actualResult, 0.00001);
     }
 
     @Test
