@@ -82,8 +82,8 @@ public class TemperatureSeriesAnalysis {
             if (minDif > Math.abs(temp-tempValue)) {
                 minDif = Math.abs(temp-tempValue);
                 searchedTemp = temp;
-            } else if (Math.abs(minDif - Math.abs(temp-tempValue)) < EPSILON &&
-                                temp > 0) {
+            } else if (Math.abs(minDif - Math.abs(temp-tempValue)) < EPSILON
+                                && temp > 0) {
                 searchedTemp = temp;
             }
         }
